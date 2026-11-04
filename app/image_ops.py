@@ -35,6 +35,7 @@ def color_histogram_png(img):
     ax.set_ylabel("Количество пикселей")
     ax.set_title("Распределение цветов исходной картинки")
     ax.legend()
+    fig.tight_layout()
     buf = io.BytesIO()
     fig.savefig(buf, format="png")
     return buf.getvalue()
