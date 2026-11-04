@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Результат</h1>
+
+    <fieldset>
+        <legend>Изображения</legend>
+        <table>
+            <tr>
+                <th>Исходное</th>
+                <th>Результат</th>
+            </tr>
+            <tr>
+                <td><img src="{{ original }}"></td>
+                <td><img src="{{ result }}"></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>График распределения цветов</legend>
+        <img src="{{ histogram }}">
+    </fieldset>
+
+    <p><a href="/">Назад</a></p>
+</body>
+</html>

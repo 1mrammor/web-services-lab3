@@ -1,0 +1,38 @@
+body {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 16px;
+    font-family: Arial, sans-serif;
+}
+
+fieldset {
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #999;
+    padding: 8px;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.error {
+    color: #b00020;
+}
