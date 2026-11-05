@@ -80,6 +80,23 @@ def test_process(monkeypatch):
     assert response.text.count("data:image/png;base64") == 3
 
 
+# после обработки имя и размер файла попадают в список и в таблицу на странице
+def test_processed_files_summary(monkeypatch):
+    main.processed_files.clear()
+    data = png_bytes(make_image(4))
+    response = post("lr", data, monkeypatch)
+    assert main.processed_files == [{"name": "test.png", "size": len(data)}]
+    assert "Обработанные файлы" in response.text
+    assert "test.png" in response.text
+
+
+# файл, который не удалось обработать, в список не попадает
+def test_failed_file_not_in_summary(monkeypatch):
+    main.processed_files.clear()
+    post("lr", b"not an image", monkeypatch)
+    assert main.processed_files == []
+
+
 # капча не пройдена (captcha_ok=False): ответ 400
 def test_captcha_failed(monkeypatch):
     response = post("lr", png_bytes(make_image(4)), monkeypatch, captcha_ok=False)

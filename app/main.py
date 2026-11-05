@@ -16,6 +16,8 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
+processed_files = []
+
 
 def show_form(request, error=None, status_code=200):
     context = {"site_key": site_key(), "error": error}
@@ -37,14 +39,18 @@ def process(
     if not verify_captcha(captcha):
         return show_form(request, "Капча не пройдена", 400)
 
+    data = image.file.read()
     try:
-        original = load_image(image.file.read())
+        original = load_image(data)
     except OSError:
         return show_form(request, "Файл не является изображением", 400)
+
+    processed_files.append({"name": image.filename, "size": len(data)})
 
     context = {
         "original": array_to_data_uri(original),
         "result": array_to_data_uri(swap_halves(original, direction)),
         "histogram": png_to_data_uri(color_histogram_png(original)),
+        "files": processed_files,
     }
     return templates.TemplateResponse(request, "result.html", context)

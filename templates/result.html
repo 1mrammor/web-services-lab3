@@ -27,6 +27,24 @@
         <img src="{{ histogram }}">
     </fieldset>
 
+    <fieldset>
+        <legend>Обработанные файлы</legend>
+        <table>
+            <tr>
+                <th>№</th>
+                <th>Имя файла</th>
+                <th>Размер</th>
+            </tr>
+            {% for f in files %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ f.name }}</td>
+                <td>{{ (f.size / 1024) | round(1) }} КБ</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+
     <p><a href="/">Назад</a></p>
 </body>
 </html>
